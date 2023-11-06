@@ -1,21 +1,5 @@
 [
     {
-        "name": "generate_wonderful_EntrySheet",
-        "description": "Based on the information provided, write an entry sheet that best matches the company, using beautiful and natural Japanese as much as possible. Also, perform the task while satisfying all of the following conditions, which are separated by asterisks.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "EntrySheet": {
-                    "type": "string",
-                    "description": "*When writing your entry sheet, start with 私がCompanyNameを志望した理由は. *DO NOT just concatenate the given information. *Take great care to ensure that your Japanese grammar is perfectly correct. *Always be careful to ensure proper consistency between sentences. *Make sure that the content is consistent from beginning to end. *From the Entry sheet fragments of others who applied to the same company, extract several expressions that can be used when preparing an entry sheet."
-                }
-            },
-            "required": [
-                "EntrySheet"
-            ]
-        }
-    },
-    {
         "name": "generate_wonderful_EntrySheet_with_steps",
         "description": "Based on the information provided, write an entry sheet that best matches the company, using beautiful and natural Japanese as much as possible. You must follow every steps. Perform the task while satisfying all of the following conditions, which are separated by asterisks.",
         "parameters": {
