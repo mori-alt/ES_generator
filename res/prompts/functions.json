@@ -1,0 +1,49 @@
+[
+    {
+        "name": "generate_wonderful_EntrySheet",
+        "description": "Based on the information provided, write an entry sheet that best matches the company, using beautiful and natural Japanese as much as possible. Also, perform the task while satisfying all of the following conditions, which are separated by asterisks.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "EntrySheet": {
+                    "type": "string",
+                    "description": "*When writing your entry sheet, start with 私がCompanyNameを志望した理由は. *DO NOT just concatenate the given information. *Take great care to ensure that your Japanese grammar is perfectly correct. *Always be careful to ensure proper consistency between sentences. *Make sure that the content is consistent from beginning to end. *From the Entry sheet fragments of others who applied to the same company, extract several expressions that can be used when preparing an entry sheet."
+                }
+            },
+            "required": [
+                "EntrySheet"
+            ]
+        }
+    },
+    {
+        "name": "generate_wonderful_EntrySheet_with_steps",
+        "description": "Based on the information provided, write an entry sheet that best matches the company, using beautiful and natural Japanese as much as possible. You must follow every steps. Perform the task while satisfying all of the following conditions, which are separated by asterisks.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "Kind_of_person_the_company_want": {
+                    "type": "string",
+                    "description": "*From CompanyName, Position, CompanyFeatures, and Companykeywords, infer what kind of people the company is looking for. *Describe exactly what the position for which you are applying entails and what skills and abilities are needed to contribute to the position."
+                },
+                "Extract_useful_expressions": {
+                    "type": "string",
+                    "description": "*Extract as many useful expressions and phrases for writing an entry sheet as possible from the punctuation-separated fragments of entry sheets of previous applicants to the company to which I want to apply."
+                },
+                "Rewrite_MY_PR_Statement": {
+                    "type": "string",
+                    "description": "*Based on the various expressions and key words and phrases you have extracted from fragments of entry sheets, rewrite MY PR Statement so that it perfectly matches the company's needs that you have inferred. *When rewriting MY PR Statement, never, ever allow any loss of information from the original MY PR Statement to occur."
+                },
+                "Perfect_EntrySheet": {
+                    "type": "string",
+                    "description": "*When writing your entry sheet, start with 私がCompanyNameを志望した理由は. *DO NOT just concatenate the given information. *Never say that you have extracted it, but use it all as my idea of what it should be. *Take great care to ensure that your Japanese grammar is perfectly correct. *Always be careful to ensure proper consistency between sentences. *Make sure that the content is consistent from beginning to end. "
+                }
+            },
+            "required": [
+                "Kind_of_person_the_company_want",
+                "Extract_useful_expressions",
+                "Rewrite_MY_PR_Statement",
+                "Perfect_EntrySheet"
+            ]
+        }
+    }
+]
