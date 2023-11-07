@@ -1,34 +1,35 @@
-from scrapers.OneCareerScraper import OneCareerScraper
 import streamlit as st
-import os
+from applications.scraper_app import app as onecareer_app
+from applications.embedding_app import app as embedding_app
+from applications.generator_app import app as rag_app
 
 
-def user_info_form():
-    default_username = os.environ.get('ONECAREER_USERNAME')
-    default_password = os.environ.get('ONECAREER_PASSWORD')
-    default_start_url = 'https://www.onecareer.jp/experiences?company=&commit=%E7%B5%9E%E3%82%8A%E8%BE%BC%E3%82%80&business_category_id=&business_subcategory_id='
+# Define the multipage class to manage the multiple apps in our program
+class MultiPage:
+    def __init__(self) -> None:
+        self.pages = []
 
-    url_input = st.text_input("URLを入力して下さい", value=default_start_url)
-    username_input = st.text_input("ユーザ名を入力してください", value=default_username)
-    pwd_input = st.text_input("パスワードを入力してください", type='password', value=default_password)
+    def add_page(self, title, func) -> None:
+        self.pages.append({
+                "title": title,
+                "function": func
+            })
 
-    st.write("あなたが入力したURLは：", url_input)
-    st.write("あなたが入力したユーザ名は：", username_input)
-
-    return url_input, username_input, pwd_input
-
-
-def main():
-    st.title("Onecareer Scraping")
-
-    login_url = 'https://www.onecareer.jp/users/sign_in'
-    url_input, username_input, pwd_input = user_info_form()
-    credentials = {'username': username_input, 'password': pwd_input}
-
-    if st.button('start scraping'):
-        scraper = OneCareerScraper(login_url, url_input, credentials)
-        scraper.crawl(url_input)
+    def run(self):
+        st.sidebar.title('Navigation')
+        # ここでページオブジェクトを選択させている
+        page = st.sidebar.radio('Go to', self.pages, format_func=lambda page: page['title'])
+        # 取得したページオブジェクトを実行することでページを表示する
+        page['function']()
 
 
-if __name__ == "__main__":
-    main()
+# Create an instance of the app
+app = MultiPage()
+
+# Add all your applications (pages) here
+app.add_page("Generator", rag_app)
+app.add_page("Scraper", onecareer_app)
+app.add_page("Embedding", embedding_app)
+
+# The main app
+app.run()
